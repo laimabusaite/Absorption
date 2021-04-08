@@ -29,18 +29,18 @@ def getFilePath(rabi, pol, phase=None, alpha = None):
 def plotData(theorData, fig, label=None, nrows=2, ncols=2):
     ax1 = fig.add_subplot(nrows, ncols, 1)
     ax1.set_title('comp1')
-    ax1.plot(theorData['B'], theorData['comp1'], label=label)
-    ax1.legend()
+    ax1.plot(theorData['B'], theorData['comp1'])#, label=label)
+    # ax1.legend()
 
     ax2 = fig.add_subplot(nrows, ncols, 2)
     ax2.set_title('comp2')
-    ax2.plot(theorData['B'], theorData['comp2'], label=label)
-    ax2.legend()
+    ax2.plot(theorData['B'], theorData['comp2'])#, label=label)
+    # ax2.legend()
 
     ax3 = fig.add_subplot(nrows, ncols, 3)
     ax3.set_title('diff')
-    ax3.plot(theorData['B'], theorData['diff'], label=label)
-    ax3.legend()
+    ax3.plot(theorData['B'], theorData['diff'])#, label=label)
+    # ax3.legend()
 
     ax4 = fig.add_subplot(nrows, ncols, 4)
     ax4.set_title('circ')
