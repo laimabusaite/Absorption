@@ -12,6 +12,7 @@ def importData(filename):
 
     return theorData
 
+
 def getFilePath(rabi, pol, phase=None, alpha = None):
     fileName = f'Absorption_Cs133-D2-PumpRabi={rabi:.2f}-shift=24.9-Ge=0'
 
@@ -26,28 +27,30 @@ def getFilePath(rabi, pol, phase=None, alpha = None):
 
     return theorPath
 
-def plotData(theorData, fig, label=None, nrows=2, ncols=2):
-    ax1 = fig.add_subplot(nrows, ncols, 1)
-    ax1.set_title('comp1')
-    ax1.plot(theorData['B'], theorData['comp1'])#, label=label)
+
+def plotData(theorData, axs, label=None, nrows=2, ncols=2):
+    # ax1 = fig.add_subplot(nrows, ncols, 1)
+    axs[0].set_title('comp1')
+    axs[0].plot(theorData['B'], theorData['comp1'])#, label=label)
     # ax1.legend()
 
-    ax2 = fig.add_subplot(nrows, ncols, 2)
-    ax2.set_title('comp2')
-    ax2.plot(theorData['B'], theorData['comp2'])#, label=label)
-    # ax2.legend()
+    # ax2 = fig.add_subplot(nrows, ncols, 2)
+    axs[1].set_title('comp2')
+    axs[1].plot(theorData['B'], theorData['comp2'], label=label)
+    axs[1].legend()
 
-    ax3 = fig.add_subplot(nrows, ncols, 3)
-    ax3.set_title('diff')
-    ax3.plot(theorData['B'], theorData['diff'])#, label=label)
+    # ax3 = fig.add_subplot(nrows, ncols, 3)
+    axs[2].set_title('diff')
+    axs[2].plot(theorData['B'], theorData['diff'])#, label=label)
     # ax3.legend()
 
-    ax4 = fig.add_subplot(nrows, ncols, 4)
-    ax4.set_title('circ')
-    ax4.plot(theorData['B'], theorData['circ'], label=label)
-    ax4.legend()
+    # ax4 = fig.add_subplot(nrows, ncols, 4)
+    axs[3].set_title('circ')
+    axs[3].plot(theorData['B'], theorData['circ'])#, label=label)
+    # ax4.legend()
 
-def plotRabiList(fig, rabiList, pol, phase=None, alpha=None, title = None):
+
+def plotRabiList(fig, axs, rabiList, pol, phase=None, alpha=None, title = None):
     if not title:
         if pol == 4:
             title = f'Rabi dependence\npol={pol}, phase={phase}, alpha={alpha}'
@@ -60,17 +63,16 @@ def plotRabiList(fig, rabiList, pol, phase=None, alpha=None, title = None):
     for rabi in rabiList:
         filePath = getFilePath(rabi, pol, phase, alpha)
         theorData = importData(filePath)
-        plotData(theorData, fig=fig, label=f'pol={pol}, rabi={rabi}')
+        plotData(theorData, axs, label=f'pol={pol}, rabi={rabi}')
 
-def plotPhaseList(fig, phaseList, pol, rabi, alphaList, title=None):
+
+def plotPhaseList(fig, axs, phaseList, pol, rabi, alphaList, title=None):
 
     if not title:
         if pol == 4:
             title = f'Phase dependence\npol={pol}, rabi={rabi},\n alpha={alphaList}'
     fig.canvas.set_window_title(title.replace('\n', ''))
     plt.suptitle(f'{title}')
-
-
 
     for idx, phase in enumerate(phaseList):
         if len(np.array(alphaList).flatten()) > 2:
@@ -79,7 +81,8 @@ def plotPhaseList(fig, phaseList, pol, rabi, alphaList, title=None):
             alpha = np.array(alphaList).flatten()
         filePath = getFilePath(rabi, pol, phase, alpha)
         theorData = importData(filePath)
-        plotData(theorData, fig=fig, label=f'pol={pol}, phase={phase}, alpha={alpha}')
+        plotData(theorData, axs, label=f'pol={pol}, phase={phase}, alpha={alpha}')
+
 
 
 
@@ -99,7 +102,10 @@ if __name__ == '__main__':
     # phaseList = [[-100, 100], [-95, 95], [-91, 91]]#, [90, -90]]
     # alphaList = [[-40, 0], [-40, 0], [-40, 0]]#, [0, 0]]
 
-    fig = plt.figure()
+    fig1 = plt.figure(1)
+    axs1 = []
+    for i in range(4):
+        axs1.append(fig1.add_subplot(2, 2, i+1))
 
     # filePath = getFilePath(rabi, pol, phase, alpha)
     # print(filePath)
@@ -107,9 +113,17 @@ if __name__ == '__main__':
     # print(theorData)
     # plotData(theorData, fig=fig)
 
-    plotRabiList(fig, rabiList[1:2], 1)
-    plotPhaseList(fig, phaseList, pol, rabi, alphaList)
+    plotRabiList(fig1, axs1, rabiList[1:2], 0)
+    # plt.show()
+    # fig = plt.figure()
+    fig2 = plt.figure(2)
+    axs2 = []
+    for i in range(4):
+        axs2.append(fig2.add_subplot(2, 2, i + 1))
+    plotRabiList(fig2, axs2, rabiList[1:2], 1)
+    plotPhaseList(fig2, axs2, phaseList, pol, rabi, alphaList)
     # plotPhaseList(fig, phaseList, 1, rabi, alphaList)
+
 
 
     plt.show()
