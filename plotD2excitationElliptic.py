@@ -1,12 +1,14 @@
 from plotElliptic import *
 from plotD2excitationLinear import *
 
-def plotD2ellipticalList(fig, rabi, pol, theta, phi, phaseList, alphaList):
+
+
+def plotD2ellipticalList(axs, rabi, pol, theta, phi, phaseList, alphaList):
     plt.suptitle(f'Rabi = {rabi} MHz')
     for idx, phase in enumerate(phaseList):
         alpha = alphaList[idx]
         compinedDataframe = importAndCombineData(rabi, pol, theta, phi, phase=phase, alpha=alpha)
-        plotData(compinedDataframe, fig=fig, label=f'pol={pol}, phase={phase}, alpha={alpha}')
+        plotData(compinedDataframe, axs=axs, label=f'pol={pol}, phase={phase}, alpha={alpha}')
 
 if __name__ == '__main__':
 
@@ -44,10 +46,13 @@ if __name__ == '__main__':
     # compinedDataframe = importAndCombineData(rabi, pol, theta, phi, phase=phase, alpha=alpha)
 
     fig = plt.figure()
+    axs = []
+    for i in range(4):
+        axs.append(fig.add_subplot(2, 2, i + 1))
 
     # plotData(compinedDataframe, fig)
 
-    plotD2ellipticalList(fig, rabi, pol, theta, phi, phaseList, alphaList)
+    plotD2ellipticalList(axs, rabi, pol, theta, phi, phaseList, alphaList)
 
     plt.show()
 

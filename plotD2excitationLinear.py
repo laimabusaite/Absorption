@@ -80,8 +80,11 @@ if __name__ == '__main__':
 
 
     fig = plt.figure()
+    axs = []
+    for i in range(4):
+        axs.append(fig.add_subplot(2, 2, i + 1))
 
-    plotData(compinedDataframe,fig)
+    plotData(compinedDataframe,axs)
 
     plt.show()
 

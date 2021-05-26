@@ -36,8 +36,8 @@ def plotData(theorData, axs, label=None, nrows=2, ncols=2):
 
     # ax2 = fig.add_subplot(nrows, ncols, 2)
     axs[1].set_title('comp2')
-    axs[1].plot(theorData['B'], theorData['comp2'], label=label)
-    axs[1].legend()
+    axs[1].plot(theorData['B'], theorData['comp2'])#, label=label)
+    # axs[1].legend()
 
     # ax3 = fig.add_subplot(nrows, ncols, 3)
     axs[2].set_title('diff')
@@ -46,8 +46,8 @@ def plotData(theorData, axs, label=None, nrows=2, ncols=2):
 
     # ax4 = fig.add_subplot(nrows, ncols, 4)
     axs[3].set_title('circ')
-    axs[3].plot(theorData['B'], theorData['circ'])#, label=label)
-    # ax4.legend()
+    axs[3].plot(theorData['B'], theorData['circ'], label=label)
+    axs[3].legend()
 
 
 def plotRabiList(fig, axs, rabiList, pol, phase=None, alpha=None, title = None):
