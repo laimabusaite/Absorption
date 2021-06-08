@@ -42,13 +42,24 @@ if __name__ == '__main__':
 
     combinedDataframe = importAndCombineDataAngle(rabi=rabi, pol=pol, theta=theta, phi=phi)
 
-    fig = plt.figure()
+    fig = plt.figure(1)
     axs = []
     for i in range(4):
         axs.append(fig.add_subplot(2, 2, i + 1))
 
     fig.suptitle(f'D2 excitation pol={pol}, theta={theta}, phi={phi}')
     rabi_list = [0.1, 1, 5, 20]
+    for rabi in rabi_list:
+        combinedDataframe = importAndCombineDataAngle(rabi=rabi, pol=pol, theta=theta, phi=phi)
+        plotData(combinedDataframe, axs, label=f'D2 Rabi = {rabi} MHz')
+
+    fig = plt.figure(2)
+    axs = []
+    for i in range(4):
+        axs.append(fig.add_subplot(2, 2, i + 1))
+
+    fig.suptitle(f'D2 excitation pol={pol}, theta={theta}, phi={phi}')
+    rabi_list = [0.1]#, 1, 5, 20]
     for rabi in rabi_list:
         combinedDataframe = importAndCombineDataAngle(rabi=rabi, pol=pol, theta=theta, phi=phi)
         plotData(combinedDataframe, axs, label=f'D2 Rabi = {rabi} MHz')
