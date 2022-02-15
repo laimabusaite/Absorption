@@ -17,7 +17,9 @@ def ellipse(omega, phase, alpha):
 
 omega = np.linspace(0,360,101)
 
-x, y = ellipse(omega, -100, -5)
+phase = 0
+alpha = 0
+x, y = ellipse(omega, phase, alpha)
 print(x, y)
 
 plt.figure(figsize=(3,3))
