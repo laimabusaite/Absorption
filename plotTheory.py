@@ -72,17 +72,20 @@ def plotRabiDependence(rabiList, folderName = '', title = None):
         ax4.legend()
 
 if __name__ == '__main__':
-    rabiList = [1, 20, 50, 100]
+    # rabiList = [1, 20, 50, 100]
+    rabiList = [0, 20]
     # transitionList = ['4-3']
     # probeList = ['4-4']
     # plotRabiDependence()
 
-    folderName = 'Test_circular_components/ellipse1'
+    # folderName = 'Test_circular_components/ellipse1'
+    folderName = 'Test_linear_polarization/linear_45'
     # print(os.path.normpath(folderName))
     #
     # directory = os.path.join('.', os.path.normpath(folderName))
     # print(directory)
-    title = 'Ellipse1 \n comp1: phase = -100 deg, alpha = 40 deg, \n comp2: phi=100 deg, alpha = 0 deg'
+    # title = 'Ellipse1 \n comp1: phase = -100 deg, alpha = 40 deg, \n comp2: phi=100 deg, alpha = 0 deg'
+    title = 'Ellipse1 \n comp1: lin45, \n comp2: lin45'
 
     # parameters = {'ellipse1': }
 
